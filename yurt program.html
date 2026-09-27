@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YurtPanel — Yönetim Merkezi</title>
+  <meta name="description" content="YurtPanel — kişisel tema ayarları ve personel hesapları içeren yerel yurt yönetim demosu." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233e63dd'/%3E%3Cpath d='M8 8l8 10 8-10M16 18v7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#101b3d;--blue:#3e63dd;--cyan:#24c6dc;--ink:#18213c;--muted:#78839d;--line:#e8ecf4;--bg:#f7f9fc;--green:#28b77a;--orange:#f3a641;--red:#ef6d72}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif}.app{display:flex;min-height:100vh}.sidebar{width:250px;background:var(--navy);color:#fff;padding:28px 18px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:11px;padding:0 12px 34px;font-family:Manrope;font-weight:800;font-size:20px}.brand-mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,#ff5a9d,#5c78ff);display:grid;place-items:center;font-weight:800}.nav-title{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#8290ba;padding:16px 14px 10px}.nav a{display:flex;align-items:center;gap:13px;text-decoration:none;color:#aeb8d5;padding:12px 14px;border-radius:11px;margin:3px 0;font-size:14px}.nav a.active,.nav a:hover{background:#273563;color:white}.nav a.active{box-shadow:inset 3px 0 #5d80ff}.icon{width:18px;text-align:center;font-size:16px}.profile{margin-top:auto;background:#1d2a52;border-radius:14px;padding:13px;display:flex;gap:10px;align-items:center}.avatar{width:32px;height:32px;border-radius:50%;background:#d9e4ff;color:#3655a4;display:grid;place-items:center;font-weight:700;font-size:12px}.profile small{display:block;color:#9da9c7;font-size:11px;margin-top:2px}.main{flex:1;padding:28px 42px;max-width:1600px;margin:auto;width:100%}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}.eyebrow{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.4px;margin-bottom:7px}.topbar h1{font:800 28px Manrope;margin:0}.actions{display:flex;align-items:center;gap:14px}.search{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 15px;width:220px;color:var(--muted)}.bell{width:42px;height:42px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:18px}.user-pill{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600}.user-pill .avatar{background:linear-gradient(135deg,#cad4ff,#f3d8ff);color:#5a4d9e}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 20px rgba(33,54,100,.03)}.stat{display:flex;justify-content:space-between;align-items:flex-start}.stat h3{font:800 28px Manrope;margin:9px 0 5px}.stat p{margin:0;color:var(--muted);font-size:13px}.stat .badge{font-size:11px;padding:6px 8px;border-radius:8px;background:#eaf9f3;color:#199265}.stat-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;font-size:18px}.blue{background:#eaf0ff;color:#4166e0}.purple{background:#f2edff;color:#865dde}.green{background:#e7f8f0;color:#2baa73}.orange{background:#fff4e5;color:#dc8c29}.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:20px}.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.card-head h2{font:700 16px Manrope;margin:0}.link{color:var(--blue);font-size:12px;font-weight:700}.chart{height:205px;position:relative}.chart svg{width:100%;height:100%;overflow:visible}.chart-labels{display:flex;justify-content:space-between;color:#a2abc0;font-size:11px;margin-top:4px}.legend{display:flex;gap:15px;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}.room-list{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.room{border:1px solid var(--line);border-radius:12px;padding:12px}.room-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px}.room small{color:var(--muted);font-size:11px;display:block;margin-top:7px}.room-status{width:8px;height:8px;border-radius:50%;background:var(--green)}.room-status.warn{background:var(--orange)}.room-status.bad{background:var(--red)}.request{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}.request:last-child{border:0}.req-icon{width:34px;height:34px;border-radius:10px;background:#f0f3fa;display:grid;place-items:center}.request strong{font-size:13px;display:block}.request span{font-size:11px;color:var(--muted)}.status{margin-left:auto;font-size:10px;padding:5px 8px;border-radius:6px;background:#fff4e4;color:#cc8125}.status.red{background:#ffeded;color:#d75c62}.status.green{background:#eaf9f1;color:#249461}.full{grid-column:1/-1}.floor{display:flex;gap:10px;align-items:center;margin:14px 0}.floor-label{font-size:12px;font-weight:700;color:var(--muted);width:48px}.mini-rooms{display:flex;gap:8px;flex:1}.mini-room{height:37px;flex:1;min-width:50px;border-radius:8px;background:#e9f8f0;border:1px solid #c6eedb;color:#218b5d;display:grid;place-items:center;font-size:11px;font-weight:600}.mini-room.warn{background:#fff6e8;border-color:#f8dfb2;color:#c78932}.mini-room.bad{background:#fff0f0;border-color:#f4c7c9;color:#ce6569}.footer-note{color:#a0a9bd;font-size:11px;text-align:right;margin-top:18px}@media(max-width:1050px){.sidebar{width:210px}.main{padding:24px}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:720px){.sidebar{display:none}.main{padding:20px 15px}.topbar{align-items:flex-start}.search{display:none}.stats,.grid{grid-template-columns:1fr}.room-list{grid-template-columns:repeat(2,1fr)}.user-pill{display:none}}
+  </style>
+  <style>
+    :root{--surface:#fff;--soft:#eef2fa;font-size:16px;color-scheme:light}
+    :root[data-theme="dark"]{--ink:#eef2ff;--muted:#adb9d4;--line:#35435e;--bg:#121b2d;--surface:#1c2840;--soft:#273551;--blue:#a1b7ff;color-scheme:dark}
+    [hidden]{display:none!important}body{font-size:1rem;line-height:1.5}button,input,select{font:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:wait;opacity:.65}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #79a1ff;outline-offset:3px}button{color:inherit}a{color:var(--blue)}.muted{color:var(--muted)}.card,.bell,.search{background:var(--surface)}.card{min-width:0}.main{min-width:0;margin:0 auto;padding:28px 32px}.sidebar{flex:0 0 250px;position:sticky;top:0;height:100vh;overflow:auto}.nav a{font-size:.9375rem}.nav-title{font-size:.6875rem}.profile{flex-shrink:0;margin-top:24px}.profile b{font-size:.875rem}.profile small{font-size:.75rem}.brand{font-size:1.25rem}.topbar{gap:20px;flex-wrap:wrap}.topbar h1{font-size:1.75rem;line-height:1.3}.eyebrow{font-size:.75rem}.actions{flex-wrap:wrap;gap:8px}.search{width:205px;font-size:.875rem;color:var(--ink)}.bell{border:1px solid var(--line);flex-shrink:0;font-size:1.125rem}.user-pill{background:transparent;border:0;font-size:.8125rem}.stat{gap:12px}.stat>div:first-child{min-width:0}.stat p{font-size:1.5rem;font-weight:600;line-height:1.3;color:var(--ink);overflow-wrap:anywhere}.stat h3{font-size:2rem;line-height:1.3;margin:14px 0 12px}.stat .badge{display:inline-block;font-size:.75rem;line-height:1.5}.stat-icon{width:50px;height:50px;min-width:50px;flex-shrink:0;font-size:32px;line-height:1}.stat-icon svg{width:50px;height:50px;display:block}.card-head{gap:12px;flex-wrap:wrap}.card-head h2{font-size:1.0625rem}.link{font-size:.8125rem;cursor:pointer}.legend,.chart-labels,.footer-note{font-size:.75rem}.legend{flex-wrap:wrap}.request{cursor:pointer;gap:12px}.request>div:nth-child(2){min-width:0}.request strong{font-size:.9375rem}.request span{font-size:.75rem}.request .status{font-size:.6875rem;color:#966014;flex-shrink:0}.request .status.red{color:#b3484e}.request .status.green{color:#187949}.req-icon{flex-shrink:0;background:var(--soft)}.floor-label{font-size:.8125rem;flex-shrink:0}.mini-rooms{min-width:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}.mini-room{min-width:0;height:44px;font-size:.8125rem;cursor:pointer}.demo-note{display:flex;gap:10px;align-items:center;margin:-10px 0 24px;color:var(--muted);font-size:.75rem}.demo-label{border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--blue);font-weight:700;letter-spacing:.04em}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:10px 15px;background:var(--surface);font-weight:600;font-size:.875rem;text-decoration:none;min-height:42px}.btn.primary{background:#3e63dd;border-color:#3e63dd;color:#fff}.btn:hover{filter:brightness(.95)}.btn.quiet{background:transparent}.btn.danger{color:#c34952}.logout{margin:14px 0 4px;background:transparent;color:#d5dff5;border-color:#435273}.mobile-menu{display:none}.form-field{display:flex;flex-direction:column;gap:7px;margin:18px 0}.form-field label{font-weight:600;font-size:.875rem}.form-field input,.form-field select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg);color:var(--ink)}.field-hint{font-size:.75rem;color:var(--muted);margin:0}.password-wrap{display:flex;position:relative}.password-wrap input{padding-right:70px}.show-password{position:absolute;right:8px;top:5px;bottom:5px;background:transparent;border:0;color:var(--blue);font-size:.75rem}.auth-shell{min-height:100vh;display:grid;place-items:center;padding:32px;background:radial-gradient(ellipse at 0% 0%,#dce4ff80,transparent 65%),var(--bg)}.auth-layout{display:grid;grid-template-columns:1fr 1fr;width:min(1020px,100%);background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 20px 70px #16275412}.auth-story{background:linear-gradient(145deg,#101b3d,#253b76);color:#fff;padding:48px;display:flex;flex-direction:column;justify-content:space-between;gap:40px}.auth-story .brand{padding:0}.auth-story h1{font:800 2.5rem/1.2 Manrope,sans-serif;margin:14px 0 20px}.auth-story p{color:#bbc9e7;font-size:1rem;line-height:1.8}.story-feature{display:flex;gap:14px;align-items:center;color:#d4dff4;margin:18px 0;font-size:.9375rem}.story-feature i{font-style:normal;background:#ffffff12;width:36px;height:36px;display:grid;place-items:center;border-radius:10px}.story-footer{font-size:.75rem;color:#a6b6dc}.auth-form-panel{padding:36px 40px}.auth-form-panel h2{font:800 1.75rem Manrope;margin:22px 0 8px}.auth-form-panel>p{font-size:.875rem}.auth-tabs{display:flex;border-radius:12px;background:var(--bg);padding:5px;gap:5px}.auth-tabs button{flex:1;border:0;background:transparent;padding:11px;border-radius:8px;color:var(--muted);font-weight:700;font-size:.875rem}.auth-tabs button[aria-pressed="true"]{background:var(--surface);color:var(--blue);box-shadow:0 2px 8px #18213c10}.form-submit{width:100%;margin-top:8px}.form-message{font-size:.8125rem;border-radius:9px;padding:10px 12px;background:#fff0f0;color:#a93740;margin:14px 0}.form-message.success{background:#eaf8f0;color:#196a49}.demo-accounts{margin-top:24px;border-top:1px solid var(--line);padding-top:18px}.demo-accounts summary{cursor:pointer;font-size:.875rem;font-weight:600}.demo-account-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.demo-account{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px;text-align:left;font-size:.75rem}.demo-account strong{display:block;color:var(--ink)}.auth-disclaimer{color:var(--muted);font-size:.75rem;line-height:1.6;margin-top:20px}.settings-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}.settings-grid h2{margin-top:0;font-size:1.25rem}.settings-grid p{font-size:.875rem}.range-top,.range-labels{display:flex;justify-content:space-between;gap:10px}.range-top{font-weight:600;font-size:.9375rem}.range-top output{color:var(--blue)}input[type="range"]{width:100%;margin:20px 0 12px;accent-color:#3e63dd;cursor:pointer;min-height:30px}.range-labels{font-size:.75rem;color:var(--muted)}.settings-separator{height:1px;background:var(--line);margin:24px 0}.preview-stat{max-width:100%;margin:20px 0;background:var(--bg)}.helper-banner{background:var(--soft);border-radius:10px;padding:14px;font-size:.8125rem;margin-bottom:20px;color:var(--muted)}.page-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}.page-heading h2{font:700 1.3rem Manrope;margin:0}.page-heading p{font-size:.875rem;margin:7px 0 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:.875rem}th{font-size:.75rem;color:var(--muted);font-weight:600;white-space:nowrap}th,td{padding:14px 12px;border-bottom:1px solid var(--line)}.tag{display:inline-block;font-size:.75rem;padding:5px 9px;border-radius:7px;background:var(--soft);white-space:nowrap}.tag.green{background:#e7f8f0;color:#187949}.tag.orange{background:#fff4e5;color:#976215}.tag.red{background:#fff0f0;color:#ad444b}.task-list{display:grid;gap:12px}.task-card{display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--line);padding:18px;border-radius:12px}.task-card h3{font-size:1rem;margin:0 0 6px}.task-card p{font-size:.8125rem;margin:0;color:var(--muted)}.task-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.summary-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.room-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:12px}.room-button{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;text-align:left;padding:16px}.room-button strong{font-size:1.125rem}.room-button small{display:block;margin-top:8px;color:var(--muted)}.room-button .tag{margin-top:12px}.empty{padding:36px;text-align:center;color:var(--muted)}.dialog{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:26px;width:min(570px,calc(100vw - 30px));max-height:85vh;overflow:auto}.dialog::backdrop{background:#08122e88;backdrop-filter:blur(4px)}.dialog-head{display:flex;gap:14px;align-items:center;justify-content:space-between;margin-bottom:20px}.dialog-head h2{font:700 1.25rem Manrope;margin:0}.dialog-body{font-size:.9375rem}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.detail-grid small{display:block;color:var(--muted);margin-bottom:6px}.dialog-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.toast{position:fixed;right:24px;bottom:24px;z-index:20;background:var(--navy);color:#fff;padding:13px 18px;border-radius:12px;box-shadow:0 8px 30px #0003;max-width:calc(100vw - 32px);font-size:.875rem}.mobile-scrim{display:none}.notice-list{display:grid;gap:12px}.notice{padding:14px;background:var(--bg);border-radius:10px;font-size:.875rem}.notice small{display:block;color:var(--muted);margin-top:5px}.summary-ring{flex-shrink:0}.summary-ring>div{background:var(--surface)!important}.summary-copy p{font-size:.875rem!important}.summary-copy>div{font-size:.8125rem!important}
+    .brand,.topbar h1,.stat h3,.card-head h2{font-family:'Manrope','DM Sans',system-ui,sans-serif}
+    @media(max-width:1350px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.sidebar{flex-basis:220px;width:220px}.grid{grid-template-columns:1fr}}
+    @media(max-width:950px){.settings-grid{grid-template-columns:1fr}.summary-stats{grid-template-columns:1fr}.auth-story{padding:32px}.auth-form-panel{padding:30px}.auth-story h1{font-size:2rem}}
+    @media(max-width:720px){.auth-shell{padding:16px}.auth-layout{grid-template-columns:1fr}.auth-story{padding:24px;gap:12px}.auth-story h1{font-size:1.5rem;margin:18px 0 10px}.auth-story p{margin:0;font-size:.875rem}.story-features,.story-footer{display:none}.auth-form-panel{padding:24px}.main{padding:22px 16px}.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:12;width:min(300px,85vw);height:100dvh}.sidebar.open{display:flex}.mobile-scrim.open{display:block;position:fixed;inset:0;background:#08122e88;z-index:11}.mobile-menu{display:grid}.topbar{gap:16px}.actions{width:100%}.search{display:block;flex:1;width:100px;min-width:80px}.stats{grid-template-columns:1fr}.stat p{max-width:none}.mini-rooms{grid-template-columns:repeat(3,minmax(0,1fr))}.floor{align-items:flex-start}.settings-grid{grid-template-columns:1fr}.task-card{align-items:flex-start;flex-direction:column}.task-actions{width:100%}.task-actions .btn{margin-left:auto}.detail-grid{grid-template-columns:1fr}.demo-note{align-items:flex-start}.legend{gap:8px}.btn{white-space:normal}.user-pill{display:none}}
+    :root{--accent:#3e63dd;--on-accent:#fff;--accent-soft:#eef2ff;--accent-border:#bdcaff;--nav-active:#273563;--ease-soft:cubic-bezier(.22,1,.36,1)}
+    .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+    .nav a.active,.nav a:hover{background:var(--nav-active)}.nav a.active{box-shadow:inset 3px 0 var(--accent)}
+    .brand-mark{background:linear-gradient(135deg,#ff5a9d,var(--accent))}.blue{background:var(--accent-soft);color:var(--blue)}
+    input[type="range"],input[type="checkbox"],input[type="radio"]{accent-color:var(--accent)}
+    :focus-visible{outline-color:var(--blue)!important}.chart path[stroke="#4d6ee5"]{stroke:var(--accent)}
+    .chart linearGradient stop{stop-color:var(--accent)}.legend .dot:first-child{background:var(--accent)!important}
+    .legend span:nth-child(2) .dot{background:#2fc18b!important}.summary-ring{background:conic-gradient(var(--accent) 0 76%,var(--line) 76%)!important}
+    .theme-fieldset{border:0;padding:0;margin:0 0 24px;min-width:0}.theme-fieldset legend{font-size:.9375rem;font-weight:700;margin-bottom:12px;padding:0}
+    .theme-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.theme-option{position:relative;min-width:0;cursor:pointer}
+    .theme-option input,.accent-choice input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+    .theme-option>span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px 8px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-size:.8125rem;min-height:96px}
+    .theme-symbol{font-size:1.5rem;line-height:1}.theme-option input:checked+span{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);background:var(--accent-soft);color:var(--blue)}
+    .theme-option input:focus-visible+span,.accent-choice input:focus-visible+span{outline:3px solid var(--blue);outline-offset:4px}
+    .theme-note{font-size:.75rem;color:var(--muted);margin:10px 0 0}.accent-choices{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .accent-choice{position:relative;cursor:pointer}.accent-choice>span{display:flex;align-items:center;gap:7px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-size:.75rem;background:var(--surface)}
+    .accent-choice input:checked+span{background:var(--accent-soft);border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+    .color-dot{display:inline-block;width:17px;height:17px;border-radius:50%;box-shadow:inset 0 0 0 1px #0002;flex-shrink:0}
+    .custom-color-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.custom-color-control{display:flex;align-items:center;gap:10px}
+    .custom-color-control label{font-size:.8125rem;font-weight:600}#accent-picker{padding:4px;width:56px;height:44px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:9px}
+    .hex-field{width:122px;min-height:44px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font-size:.875rem;font-family:ui-monospace,monospace}
+    .hex-field[aria-invalid="true"]{border-color:#cf5661}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+    .motion-setting{display:flex;gap:12px;align-items:flex-start;padding:14px;background:var(--bg);border-radius:12px;margin-bottom:16px}.motion-setting input{margin:4px 0 0;width:18px;height:18px;flex-shrink:0;cursor:pointer}.motion-setting label{font-weight:600;font-size:.875rem;cursor:pointer}.motion-setting small{display:block;color:var(--muted);font-size:.75rem;margin-top:5px}
+    .settings-grid{align-items:start}.preview-theme-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:.8125rem;margin:20px 0}.preview-accent{background:var(--accent);color:var(--on-accent);padding:6px 10px;border-radius:8px;font-weight:600}
+    .theme-preview-panel{position:sticky;top:24px}.settings-heading{margin-bottom:22px}.settings-heading h2{margin-bottom:10px}.settings-heading p{margin:0}
+    @media(prefers-reduced-motion:no-preference){
+      :root[data-motion="full"] body,:root[data-motion="full"] .card,:root[data-motion="full"] .dialog,:root[data-motion="full"] .search,:root[data-motion="full"] .theme-option>span,:root[data-motion="full"] .accent-choice>span{transition:background-color .28s ease,color .2s ease,border-color .2s ease,box-shadow .25s ease,transform .28s var(--ease-soft)}
+      :root[data-motion="full"] .btn,:root[data-motion="full"] .bell,:root[data-motion="full"] .nav a,:root[data-motion="full"] .mini-room,:root[data-motion="full"] .room-button,:root[data-motion="full"] .demo-account,:root[data-motion="full"] .auth-tabs button{transition:background-color .22s ease,color .22s ease,border-color .22s ease,box-shadow .22s ease,transform .24s var(--ease-soft)}
+      :root[data-motion="full"] #page-content>.card,:root[data-motion="full"] #page-content>.stats>.card,:root[data-motion="full"] #page-content>.grid>.card,:root[data-motion="full"] .settings-grid>.card{animation:soft-enter .48s var(--ease-soft) backwards}
+      :root[data-motion="full"] #page-content>.stats>.card:nth-child(2),:root[data-motion="full"] #page-content>.grid>.card:nth-child(2),:root[data-motion="full"] .settings-grid>.card:nth-child(2){animation-delay:55ms}
+      :root[data-motion="full"] #page-content>.stats>.card:nth-child(3),:root[data-motion="full"] #page-content>.grid>.card:nth-child(3){animation-delay:100ms}
+      :root[data-motion="full"] #page-content>.stats>.card:nth-child(4),:root[data-motion="full"] #page-content>.grid>.card:nth-child(4){animation-delay:145ms}
+      :root[data-motion="full"] .auth-layout{animation:soft-enter .55s var(--ease-soft) backwards}
+      :root[data-motion="full"] #login-form:not([hidden]),:root[data-motion="full"] #register-form:not([hidden]){animation:soft-enter .28s var(--ease-soft) backwards}
+      :root[data-motion="full"] .dialog[open]{animation:soft-dialog .28s var(--ease-soft) backwards}
+      :root[data-motion="full"] .dialog[open]::backdrop{animation:soft-fade .24s ease backwards}
+      :root[data-motion="full"] .toast:not([hidden]){animation:soft-enter .3s var(--ease-soft) backwards}
+      :root[data-motion="full"] .chart path[stroke="#4d6ee5"]{stroke-dasharray:1100;animation:soft-chart .95s var(--ease-soft) backwards}
+      :root[data-motion="full"] .chart path[fill="url(#area)"]{animation:soft-fade .85s ease backwards}
+      :root[data-motion="full"] .stat-icon{transition:transform .3s var(--ease-soft)}
+      :root[data-motion="full"] .btn:active,:root[data-motion="full"] .bell:active,:root[data-motion="full"] .room-button:active{transform:scale(.98)}
+      @media(hover:hover){
+        :root[data-motion="full"] .stat:hover{transform:translateY(-3px);box-shadow:0 12px 28px #0f1b3d12;border-color:var(--accent-border)}
+        :root[data-motion="full"] .stat:hover .stat-icon{transform:scale(1.06)}
+        :root[data-motion="full"] .btn:hover,:root[data-motion="full"] .bell:hover,:root[data-motion="full"] .mini-room:hover,:root[data-motion="full"] .room-button:hover,:root[data-motion="full"] .demo-account:hover{transform:translateY(-2px)}
+        :root[data-motion="full"] .nav a:hover{transform:translateX(3px)}
+      }
+      @media(max-width:720px){:root[data-motion="full"] .sidebar.open{animation:soft-sidebar .3s var(--ease-soft) backwards}:root[data-motion="full"] .mobile-scrim.open{animation:soft-fade .25s ease backwards}}
+    }
+    @keyframes soft-enter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes soft-dialog{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes soft-fade{from{opacity:0}to{opacity:1}}
+    @keyframes soft-chart{from{stroke-dashoffset:1100}to{stroke-dashoffset:0}}
+    @keyframes soft-sidebar{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+    :root[data-motion="reduced"] *,:root[data-motion="reduced"] *::before,:root[data-motion="reduced"] *::after,:root[data-motion="reduced"] .dialog::backdrop{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after,.dialog::backdrop{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    @media(max-width:950px){.theme-preview-panel{position:static}}
+    /* Fit the authentication shell to the viewport; keep short-screen forms scrollable. */
+    .auth-shell{height:100vh;height:100dvh;min-height:0;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom));overflow:hidden}
+    .auth-layout{width:min(1080px,100%);height:100%;max-height:760px;min-height:0;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}
+    .auth-layout>*{min-width:0;min-height:0}
+    .auth-story{padding:clamp(24px,3vw,44px);gap:24px;overflow:auto}
+    .auth-story h1{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+    .auth-form-panel{padding:clamp(20px,3vh,32px) clamp(20px,3vw,36px);overflow-y:auto;overscroll-behavior-y:contain;scroll-padding-block:72px 24px;scrollbar-width:thin}
+    .auth-tabs{position:sticky;top:0;z-index:2;background:var(--bg);box-shadow:0 0 0 4px var(--surface)}
+    .auth-tabs button{min-height:44px;padding:9px 10px}
+    .auth-form-panel h2{font-size:1.5rem;line-height:1.25;margin:18px 0 6px}
+    #auth-subtitle{margin:0 0 14px}
+    .auth-form-panel .form-field{margin:12px 0;gap:5px;min-width:0}
+    .auth-form-panel .form-field input{min-width:0;min-height:44px;font-size:1rem;padding-block:9px}
+    .auth-form-panel .password-wrap{min-width:0}
+    #register-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+    #register-form .form-field{margin:0}
+    #register-form>.field-hint,#register-form>.form-message,#register-form>.form-submit{grid-column:1/-1}
+    .auth-form-panel .demo-accounts{margin-top:16px;padding-top:12px}
+    .demo-accounts summary{min-height:44px;padding-block:10px}
+    .auth-form-panel .demo-account-list{margin:8px 0}
+    .auth-form-panel .auth-disclaimer{font-size:.75rem;line-height:1.5;margin:12px 0 0}
+    @media(min-width:721px) and (max-height:650px){
+      .auth-shell{padding:12px}.auth-form-panel{padding:16px 24px}.auth-form-panel h2{margin-top:12px}
+      .auth-story{padding:24px}.auth-story .story-features,.auth-story .story-footer{display:none}
+    }
+    @media(max-width:720px){
+      .auth-shell{padding:12px;padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+      .auth-layout{max-width:540px;max-height:860px;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);border-radius:18px}
+      .auth-story{padding:12px 20px;gap:0;overflow:visible}
+      .auth-story>div:not(.brand){display:none}
+      .auth-story .brand{font-size:1.125rem;gap:10px}.auth-story .brand-mark{width:30px;height:30px;border-radius:9px}
+      .auth-form-panel{padding:16px 20px;scroll-padding-top:72px}
+      .auth-form-panel h2{font-size:1.375rem;margin-top:14px}
+    }
+    @media(max-width:440px){
+      #register-form{grid-template-columns:minmax(0,1fr);gap:8px}
+      .auth-form-panel{padding:14px 16px}.auth-form-panel .form-field{margin:10px 0}
+      .auth-form-panel .demo-accounts{margin-top:12px;padding-top:8px}
+    }
+    @media(max-height:500px){.auth-layout{max-height:none}.auth-form-panel h2{margin-top:10px}#auth-subtitle{margin-bottom:10px}}
+  </style>
+</head>
+<body>
+<section id="auth-screen" class="auth-shell" aria-label="YurtPanel giriş">
+  <div class="auth-layout">
+    <div class="auth-story"><div class="brand"><div class="brand-mark">Y</div>YurtPanel</div><div><div class="eyebrow" style="color:#adbeff">YURDUNUZUN DİJİTAL MERKEZİ</div><h1>Her şey yerli yerinde.</h1><p>Öğrenciler, odalar ve günlük işler.<br>Yurdunuzun tüm ritmi, tek bir panelde.</p><div class="story-features"><div class="story-feature"><i>⌂</i>Oda ve öğrenci yönetimi</div><div class="story-feature"><i>✓</i>Ekibinize özel görev ekranları</div><div class="story-feature"><i>◐</i>Size göre şekillenen görünüm</div></div></div><div class="story-footer">YurtPanel · Yerel demo sürümü</div></div>
+    <div class="auth-form-panel">
+      <div class="auth-tabs" role="group" aria-label="Hesap işlemi"><button id="login-tab" type="button" aria-pressed="true">Giriş yap</button><button id="register-tab" type="button" aria-pressed="false">Kayıt ol</button></div>
+      <h2 id="auth-title">Tekrar hoş geldin.</h2><p id="auth-subtitle" class="muted">Devam etmek için demo hesabınla giriş yap.</p>
+      <form id="login-form">
+        <div class="form-field"><label for="login-username">Kullanıcı adı</label><input id="login-username" name="username" autocomplete="username" placeholder="Örn. admin" required maxlength="24" autocapitalize="none" spellcheck="false"></div>
+        <div class="form-field"><label for="login-password">Parola</label><div class="password-wrap"><input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Parolanı gir" required><button class="show-password" data-password="login-password" type="button" aria-label="Parolayı göster" aria-pressed="false">Göster</button></div></div>
+        <p id="login-message" class="form-message" role="alert" hidden></p><button class="btn primary form-submit" type="submit">Giriş yap →</button>
+      </form>
+      <form id="register-form" hidden>
+        <div class="form-field"><label for="register-name">Ad soyad</label><input id="register-name" autocomplete="name" required minlength="2" maxlength="60" placeholder="Adın ve soyadın"></div>
+        <div class="form-field"><label for="register-username">Kullanıcı adı</label><input id="register-username" autocomplete="username" required minlength="3" maxlength="24" pattern="[a-zA-Z0-9_.\-]{3,24}" autocapitalize="none" spellcheck="false" aria-describedby="username-hint" placeholder="ornek.kullanici"><p class="field-hint" id="username-hint">3–24 karakter: İngilizce harf, rakam, nokta, alt çizgi veya tire.</p></div>
+        <div class="form-field"><label for="register-password">Parola</label><div class="password-wrap"><input id="register-password" type="password" autocomplete="new-password" required minlength="4" maxlength="128" placeholder="En az 4 karakter (demo)"><button class="show-password" data-password="register-password" type="button" aria-label="Parolayı göster" aria-pressed="false">Göster</button></div></div>
+        <div class="form-field"><label for="register-confirm">Parola tekrar</label><input id="register-confirm" type="password" autocomplete="new-password" required minlength="4" maxlength="128" placeholder="Parolanı tekrar gir"></div>
+        <p class="field-hint">Yeni kayıtlar öğrenci demosu olarak açılır. Personel ekranları için aşağıdaki hazır hesapları kullanabilirsin.</p><p id="register-message" class="form-message" role="alert" hidden></p><button class="btn primary form-submit" type="submit">Demo hesabı oluştur →</button>
+      </form>
+      <details class="demo-accounts"><summary>Demo hesaplar · admin / 1234</summary><div class="demo-account-list" id="demo-account-list"></div><p class="field-hint">Tüm hazır hesapların parolası: <strong>1234</strong>. Bir hesabı seçerek giriş alanlarını doldurabilirsin.</p></details>
+      <p class="auth-disclaimer">Bu ekran bir demo girişidir; gerçek kimlik doğrulama veya sunucu yetkilendirmesi sağlamaz. Yeni hesaplar yalnızca bu tarayıcıda tutulur. Gerçek şifre veya kişisel veri kullanma.</p>
+    </div>
+  </div>
+</section>
+<noscript><p>Bu paneli kullanmak için tarayıcında JavaScript etkin olmalıdır.</p></noscript>
+<div class="app" id="app" hidden>
+  <div id="mobile-scrim" class="mobile-scrim"></div>
+  <aside class="sidebar" id="sidebar"><div class="brand"><div class="brand-mark">Y</div>YurtPanel</div><div class="nav-title">Çalışma alanı</div><nav class="nav" id="main-nav" aria-label="Ana menü"></nav><div class="nav-title">Kişisel</div><nav class="nav"><a href="#settings" data-page="settings"><span class="icon">⚙</span>Tema ayarları</a></nav><div class="profile"><div class="avatar" id="sidebar-avatar">A</div><div><b id="sidebar-name">Ayaz</b><small id="sidebar-role">Yurt Müdürü</small></div></div><button type="button" class="btn logout" data-action="logout">Çıkış yap ↗</button></aside>
+  <main class="main"><div class="topbar"><div><div class="eyebrow" id="today"></div><h1 id="page-title" tabindex="-1">Günaydın, Ayaz 👋</h1></div><div class="actions"><button class="bell mobile-menu" id="menu-button" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="sidebar">☰</button><form id="search-form" role="search" style="display:contents"><input class="search" id="global-search" type="search" placeholder="Panelde ara..." aria-label="Panelde ara" maxlength="80"></form><button class="bell" data-action="notifications" type="button" aria-label="Bildirimleri aç">♧</button><button class="bell" data-page="settings" type="button" aria-label="Tema ayarlarını aç">⚙</button><button class="user-pill" data-action="profile" type="button"><span class="avatar" id="top-avatar">A</span><span id="top-name">Ayaz</span>⌄</button></div></div>
+  <div class="demo-note"><span class="demo-label">DEMO</span><span id="demo-context">Örnek veriler · İşlem değişiklikleri bu sekmedeki oturumda tutulur.</span></div>
+  <div id="page-content">
+  <section class="stats"><div class="card stat"><div><p>Toplam öğrenci</p><h3>500</h3><span class="badge">↑ %4,2 bu ay</span></div><div class="stat-icon blue">♙</div></div><div class="card stat"><div><p>Yurt doluluk oranı</p><h3>%92</h3><span class="badge">↑ %2,8 bu ay</span></div><div class="stat-icon purple">⌂</div></div><div class="card stat"><div><p>Açık talepler</p><h3>19</h3><span class="badge" style="background:#fff4e4;color:#cc8125">7 acil talep</span></div><div class="stat-icon orange">♧</div></div><div class="card stat"><div><p>Bugün yemek kullanan</p><h3>384</h3><span class="badge">%76,8 katılım</span></div><div class="stat-icon green">◒</div></div></section>
+  <section class="grid"><div class="card"><div class="card-head"><h2>Doluluk ve yemek kullanımı</h2><div class="legend"><span><i class="dot" style="background:#4d6ee5"></i>Doluluk</span><span><i class="dot" style="background:#2fc18b"></i>Yemek</span></div></div><div class="chart"><svg viewBox="0 0 700 205" preserveAspectRatio="none"><defs><linearGradient id="area" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#4d6ee5" stop-opacity=".18"/><stop offset="1" stop-color="#4d6ee5" stop-opacity="0"/></linearGradient></defs><g stroke="#edf0f6" stroke-width="1"><path d="M0 30H700M0 75H700M0 120H700M0 165H700"/></g><path d="M0 90 C60 70 80 78 125 65 S190 98 245 72 S310 45 355 64 S415 38 465 52 S535 82 580 53 S640 40 700 48 L700 205 L0 205Z" fill="url(#area)"/><path d="M0 90 C60 70 80 78 125 65 S190 98 245 72 S310 45 355 64 S415 38 465 52 S535 82 580 53 S640 40 700 48" fill="none" stroke="#4d6ee5" stroke-width="3"/><path d="M0 145 C65 128 90 140 125 125 S185 145 245 118 S315 130 355 108 S420 125 465 110 S530 128 580 104 S650 115 700 98" fill="none" stroke="#2fc18b" stroke-width="3" stroke-dasharray="6 5"/></svg></div><div class="chart-labels"><span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span></div></div>
+  <div class="card"><div class="card-head"><h2>Son talepler</h2><span class="link">Tümünü gör →</span></div><div class="request"><div class="req-icon">❄</div><div><strong>Klima çalışmıyor</strong><span>Oda 405 · 12 dk önce</span></div><span class="status red">Acil</span></div><div class="request"><div class="req-icon">♧</div><div><strong>Oda temizliği</strong><span>Oda 218 · 38 dk önce</span></div><span class="status">Bekliyor</span></div><div class="request"><div class="req-icon">▤</div><div><strong>Yemek önerisi</strong><span>Oda 112 · 1 sa önce</span></div><span class="status green">Çözüldü</span></div><div class="request"><div class="req-icon">◷</div><div><strong>Hafta sonu izni</strong><span>Emre Kaya · 2 sa önce</span></div><span class="status">Bekliyor</span></div></div>
+  <div class="card"><div class="card-head"><h2>Yurt dijital ikizi</h2><span class="link">Kat planını aç →</span></div><div class="floor"><div class="floor-label">1. Kat</div><div class="mini-rooms"><div class="mini-room">101</div><div class="mini-room">102</div><div class="mini-room warn">103</div><div class="mini-room">104</div><div class="mini-room">105</div><div class="mini-room bad">106</div></div></div><div class="floor"><div class="floor-label">2. Kat</div><div class="mini-rooms"><div class="mini-room">201</div><div class="mini-room">202</div><div class="mini-room">203</div><div class="mini-room">204</div><div class="mini-room warn">205</div><div class="mini-room">206</div></div></div><div class="floor"><div class="floor-label">3. Kat</div><div class="mini-rooms"><div class="mini-room">301</div><div class="mini-room">302</div><div class="mini-room">303</div><div class="mini-room">304</div><div class="mini-room">305</div><div class="mini-room">306</div></div></div><div class="footer-note">● Normal &nbsp; ● Dikkat &nbsp; ● Sorun</div></div>
+  <div class="card"><div class="card-head"><h2>Bugünün özeti</h2><span class="link">Raporu görüntüle →</span></div><div style="display:flex;gap:20px;align-items:center"><div style="width:115px;height:115px;border-radius:50%;background:conic-gradient(#3e63dd 0 76%,#e7ebf4 76%);display:grid;place-items:center"><div style="width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;font:700 18px Manrope">%76</div></div><div><p style="font-weight:700;margin:0 0 9px">Yemekhane katılımı</p><p style="font-size:12px;color:var(--muted);line-height:1.6;margin:0">384 öğrenci bugün<br>öğle yemeğini kullandı.</p><div style="margin-top:10px;color:#22a36f;font-size:12px;font-weight:700">↑ Düne göre %8,4</div></div></div></div></section>
+  </div></main></div>
+<dialog class="dialog" id="detail-dialog" aria-labelledby="dialog-title"><div class="dialog-head"><h2 id="dialog-title">Detay</h2><button class="btn quiet" type="button" id="close-dialog" aria-label="Pencereyi kapat">✕</button></div><div class="dialog-body" id="dialog-body"></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+'use strict';
+(() => {
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const $$ = (selector, root=document) => [...root.querySelectorAll(selector)];
+  const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const normalize = value => String(value).trim().toLocaleLowerCase('tr-TR');
+  const ACCOUNTS_KEY = 'yurtpanel.demo.accounts.v1';
+  const SESSION_KEY = 'yurtpanel.demo.session.v1';
+  const PREFS_KEY = 'yurtpanel.demo.preferences.';
+  const TASKS_KEY = 'yurtpanel.demo.tasks.v1';
+  const DEMOS = [
+    {username:'admin',name:'Ayaz',role:'admin',label:'Yurt Müdürü'},
+    {username:'teknik',name:'Mert · Demo',role:'technical',label:'Teknik Personel'},
+    {username:'temizlik',name:'Elif · Demo',role:'cleaning',label:'Temizlik Personeli'},
+    {username:'yemekhane',name:'Can · Demo',role:'dining',label:'Yemekhane Personeli'},
+    {username:'guvenlik',name:'Deniz · Demo',role:'security',label:'Güvenlik Personeli'},
+    {username:'ogrenci',name:'Emre · Demo',role:'student',label:'Öğrenci',room:'302'}
+  ];
+  const NAV = {
+    home:['▦','Genel Bakış'],rooms:['⌂','Odalar ve Katlar'],students:['♙','Öğrenciler'],permissions:['◷','İzinler'],requests:['♧','Talepler'],dining:['▤','Yemekhane'],cleaning:['✧','Temizlik'],technical:['⌁','Teknik Servis'],payments:['₺','Ödemeler'],settings:['⚙','Tema ayarları']
+  };
+  const ACCESS = {
+    admin:['home','rooms','students','permissions','requests','dining','cleaning','technical','payments','settings'],
+    technical:['home','technical','settings'],cleaning:['home','cleaning','settings'],dining:['home','dining','settings'],security:['home','permissions','settings'],student:['home','requests','dining','settings']
+  };
+  const initialTasks = [
+    {id:'T184',title:'Klima çalışmıyor',room:'405',category:'technical',priority:'Acil',status:'Bekliyor',description:'Klimanın açılması ve soğutma işlevi kontrol edilecek.',owner:'ogrenci'},
+    {id:'T185',title:'Lavabo musluğu sızdırıyor',room:'106',category:'technical',priority:'Normal',status:'İşleme alındı',description:'Musluk bağlantısındaki sızıntı giderilecek.',owner:'demo106'},
+    {id:'T186',title:'Masa lambası çalışmıyor',room:'302',category:'technical',priority:'Normal',status:'Bekliyor',description:'Çalışma masası aydınlatması kontrol edilecek.',owner:'ogrenci'},
+    {id:'C218',title:'Oda temizliği',room:'218',category:'cleaning',priority:'Normal',status:'Bekliyor',description:'Zemin ve ortak yüzeylerin temizliği.',owner:'demo218'},
+    {id:'C103',title:'Planlı oda temizliği',room:'103',category:'cleaning',priority:'Normal',status:'İşleme alındı',description:'Haftalık temizlik planındaki oda.',owner:'demo103'},
+    {id:'C302',title:'Ortak alan temizliği',room:'302',category:'cleaning',priority:'Normal',status:'Çözüldü',description:'Koridor ve ortak kullanım alanı temizliği tamamlandı.',owner:'ogrenci'},
+    {id:'Y112',title:'Yemek önerisi',room:'112',category:'dining',priority:'Normal',status:'Çözüldü',description:'Haftalık menüye sebze seçeneği eklenmesi önerildi.',owner:'demo112'},
+    {id:'I302',title:'Hafta sonu izni',room:'302',category:'permissions',priority:'Normal',status:'Bekliyor',description:'26–27 Eylül: aile ziyareti. Örnek öğrenci: Emre.',owner:'ogrenci'}
+  ];
+  const safeRead = (storageName,key,fallback) => {try{return JSON.parse(window[storageName].getItem(key)) ?? fallback;}catch{return fallback;}};
+  const safeWrite = (storageName,key,value) => {try{window[storageName].setItem(key,JSON.stringify(value));return true;}catch{return false;}};
+  const safeRemove = (storageName,key) => {try{window[storageName].removeItem(key);}catch{}};
+  let storedTasks=safeRead('sessionStorage',TASKS_KEY,null);
+  let tasks=Array.isArray(storedTasks)&&storedTasks.length&&storedTasks.every(t=>typeof t?.id==='string'&&typeof t?.title==='string'&&typeof t?.category==='string')?storedTasks:initialTasks.map(t=>({...t}));
+  const DEFAULT_PREFERENCES={scale:100,theme:'light',accent:'#3e63dd',motion:true};
+  const ACCENT_PRESETS=[['Mavi','#3e63dd'],['Mor','#865dde'],['Pembe','#dc3f88'],['Yeşil','#09876a'],['Turuncu','#c66b1d']];
+  const validHex=value=>typeof value==='string'&&/^#[0-9a-f]{6}$/i.test(value);
+  let currentUser=null,currentPage='home',preferences={...DEFAULT_PREFERENCES},toastTimer;
+  let modalTrigger=null;
+  const dashboardHTML=$('#page-content').innerHTML;
+  const mediaTheme=window.matchMedia('(prefers-color-scheme: dark)');
+  const mediaMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const icons={
+    students:'<circle cx="16" cy="12" r="4"/><circle cx="31" cy="15" r="3"/><path d="M7 35v-5a9 9 0 0 1 18 0v5M28 25a7 7 0 0 1 10 6v4"/>',
+    rooms:'<path d="M10 39V9h26v30M6 39h34M20 39V29h6v10M16 16h3m8 0h3m-14 7h3m8 0h3"/>',
+    tasks:'<rect x="11" y="10" width="26" height="30" rx="4"/><path d="M18 10V7h12v3M18 21h12M18 28h12M18 35h7"/>',
+    dining:'<path d="M9 8v10a5 5 0 0 0 10 0V8M14 8v32M36 8c-8 3-9 16 0 16V8v32"/>'
+  };
+  const icon = (kind) => '<svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+icons[kind]+'</svg>';
+  const notify = text => {clearTimeout(toastTimer);$('#toast').textContent=text;$('#toast').hidden=false;toastTimer=setTimeout(()=>{$('#toast').hidden=true;},3500);};
+  const setFormMessage=(id,message,success=false)=>{const el=$(id);el.textContent=message;el.classList.toggle('success',success);el.hidden=false;};
+  const registeredAccounts=()=>{const data=safeRead('localStorage',ACCOUNTS_KEY,[]);return Array.isArray(data)?data.filter(a=>a&&typeof a.username==='string'&&typeof a.name==='string'&&typeof a.hash==='string'&&typeof a.salt==='string'):[];};
+  const publicUser=account=>({username:account.username,name:account.name,role:account.role||'student',label:account.label||'Öğrenci',room:account.room||'Atanmadı'});
+  const lookupUser=username=>{const demo=DEMOS.find(a=>a.username===username);if(demo)return publicUser(demo);const local=registeredAccounts().find(a=>a.username===username);return local?{...publicUser(local),role:'student',label:'Öğrenci'}:null;};
+  const digestPassword=async(password,salt)=>{
+    if(!window.crypto?.subtle)throw new Error('Bu tarayıcı yerel hesap kaydı için gerekli güvenli şifreleme özelliğini desteklemiyor. Güncel bir tarayıcıda deneyebilir veya hazır demo hesaplarını kullanabilirsin.');
+    const bytes=Uint8Array.from(salt.match(/.{2}/g),hex=>parseInt(hex,16));
+    const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+    const result=await crypto.subtle.deriveBits({name:'PBKDF2',salt:bytes,iterations:150000,hash:'SHA-256'},key,256);
+    return Array.from(new Uint8Array(result),v=>v.toString(16).padStart(2,'0')).join('');
+  };
+  function authMode(mode){
+    const registration=mode==='register';
+    $('#login-form').hidden=registration;$('#register-form').hidden=!registration;
+    $('#login-tab').setAttribute('aria-pressed',String(!registration));$('#register-tab').setAttribute('aria-pressed',String(registration));
+    $('#auth-title').textContent=registration?'Aramıza hoş geldin.':'Tekrar hoş geldin.';
+    $('#auth-subtitle').textContent=registration?'Kendi yerel demo hesabını oluştur.':'Devam etmek için demo hesabınla giriş yap.';
+    $('#login-message').hidden=true;$('#register-message').hidden=true;
+  }
+  $('#login-tab').addEventListener('click',()=>authMode('login'));
+  $('#register-tab').addEventListener('click',()=>authMode('register'));
+  $('#demo-account-list').innerHTML=DEMOS.map(a=>'<button type="button" class="demo-account" data-demo="'+a.username+'"><strong>'+a.label+'</strong>'+a.username+' / 1234</button>').join('');
+  $('#auth-screen').addEventListener('click',event=>{
+    const demo=event.target.closest('[data-demo]');if(demo){authMode('login');$('#login-username').value=demo.dataset.demo;$('#login-password').value='1234';$('#login-form button[type="submit"]').focus();}
+    const toggle=event.target.closest('[data-password]');if(toggle){const field=document.getElementById(toggle.dataset.password);const reveal=field.type==='password';field.type=reveal?'text':'password';toggle.textContent=reveal?'Gizle':'Göster';toggle.setAttribute('aria-label',reveal?'Parolayı gizle':'Parolayı göster');toggle.setAttribute('aria-pressed',String(reveal));}
+  });
+  $('#login-form').addEventListener('submit',async event=>{
+    event.preventDefault();const submit=$('#login-form button[type="submit"]');submit.disabled=true;$('#login-message').hidden=true;
+    try{
+      const username=$('#login-username').value.trim().toLowerCase(),password=$('#login-password').value;
+      const demo=DEMOS.find(a=>a.username===username);let valid=!!demo&&password==='1234';
+      if(!demo){const account=registeredAccounts().find(a=>a.username===username);if(account)valid=await digestPassword(password,account.salt)===account.hash;}
+      if(!valid){setFormMessage('#login-message','Kullanıcı adı veya parola hatalı. Hazır demo hesaplarının parolası 1234.');return;}
+      enterApp(lookupUser(username));$('#login-password').value='';
+    }catch(error){setFormMessage('#login-message',error.message);}finally{submit.disabled=false;}
+  });
+  $('#register-form').addEventListener('submit',async event=>{
+    event.preventDefault();const submit=$('#register-form button[type="submit"]');submit.disabled=true;$('#register-message').hidden=true;
+    try{
+      const name=$('#register-name').value.trim(),username=$('#register-username').value.trim().toLowerCase(),password=$('#register-password').value;
+      if(name.length<2||!/^[a-z0-9_.-]{3,24}$/.test(username)||password.length<4)throw new Error('Lütfen adını, uygun bir kullanıcı adını ve en az 4 karakterli parolanı gir.');
+      if(password!==$('#register-confirm').value)throw new Error('Parolalar eşleşmiyor. Lütfen tekrar kontrol et.');
+      if(lookupUser(username))throw new Error('Bu kullanıcı adı zaten kullanılıyor. Başka bir ad seç.');
+      if(!window.crypto?.subtle)throw new Error('Yerel kayıt bu tarayıcıda desteklenmiyor. Hazır demo hesaplarını kullanabilir veya güncel bir tarayıcıda deneyebilirsin.');
+      const salt=Array.from(crypto.getRandomValues(new Uint8Array(16)),v=>v.toString(16).padStart(2,'0')).join('');
+      const hash=await digestPassword(password,salt);const accounts=registeredAccounts();
+      if(lookupUser(username))throw new Error('Bu kullanıcı adı artık kullanılıyor. Başka bir ad seç.');
+      accounts.push({username,name,hash,salt,role:'student',label:'Öğrenci',room:'Atanmadı'});
+      if(!safeWrite('localStorage',ACCOUNTS_KEY,accounts))throw new Error('Tarayıcı yerel kayda izin vermiyor. Hesap oluşturulmadı; hazır demo hesaplarını kullanabilirsin.');
+      $('#register-form').reset();authMode('login');$('#login-username').value=username;$('#login-password').value='';setFormMessage('#login-message','Demo hesabın oluşturuldu. Şimdi parolanla giriş yapabilirsin.',true);$('#login-password').focus();
+    }catch(error){setFormMessage('#register-message',error.message);}finally{submit.disabled=false;}
+  });
+  function mixHex(first,second,weight){
+    const rgb=hex=>[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
+    const a=rgb(first),b=rgb(second);return '#'+a.map((v,i)=>Math.round(v+(b[i]-v)*weight).toString(16).padStart(2,'0')).join('');
+  }
+  function luminance(hex){
+    const rgb=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(v=>v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4));
+    return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];
+  }
+  const contrast=(a,b)=>(Math.max(luminance(a),luminance(b))+.05)/(Math.min(luminance(a),luminance(b))+.05);
+  function readableAccent(accent,surface){
+    const target=luminance(surface)>.25?'#101b3d':'#ffffff';let result=accent;
+    for(let i=1;i<=20&&contrast(result,surface)<4.5;i++)result=mixHex(accent,target,i/20);
+    return result;
+  }
+  function applyPreferences(){
+    const scale=Math.min(140,Math.max(80,Number(preferences.scale)||100));preferences.scale=scale;
+    const root=document.documentElement;
+    root.style.fontSize=(16*scale/100)+'px';
+    const theme=preferences.theme==='system'?(mediaTheme.matches?'dark':'light'):preferences.theme;
+    root.dataset.theme=theme;root.dataset.motion=preferences.motion&&!mediaMotion.matches?'full':'reduced';
+    preferences.accent=validHex(preferences.accent)?preferences.accent.toLowerCase():DEFAULT_PREFERENCES.accent;
+    const accent=preferences.accent,surface=theme==='dark'?'#1c2840':'#ffffff';
+    const soft=mixHex(accent,surface,theme==='dark'?.83:.93);
+    const readable=readableAccent(accent,soft);
+    root.style.setProperty('--accent',accent);root.style.setProperty('--blue',readable);
+    root.style.setProperty('--on-accent',contrast(accent,'#ffffff')>=contrast(accent,'#000000')?'#ffffff':'#000000');
+    root.style.setProperty('--accent-soft',soft);root.style.setProperty('--accent-border',mixHex(accent,surface,.58));
+    root.style.setProperty('--nav-active',mixHex(accent,'#101b3d',.76));
+    if($('#text-scale-output'))$('#text-scale-output').textContent='%'+scale;
+    if($('#title-size-preview'))$('#title-size-preview').textContent=(24*scale/100).toLocaleString('tr-TR',{maximumFractionDigits:1})+' px';
+    if($('#text-scale'))$('#text-scale').setAttribute('aria-valuetext','Yüzde '+scale);
+    $$('input[name="theme-mode"]').forEach(input=>{input.checked=input.value===preferences.theme;});
+    $$('input[name="accent-preset"]').forEach(input=>{input.checked=input.value===accent;});
+    if($('#accent-picker'))$('#accent-picker').value=accent;
+    if($('#accent-hex')&&document.activeElement!==$('#accent-hex'))$('#accent-hex').value=accent;
+    if($('#motion-toggle'))$('#motion-toggle').checked=preferences.motion;
+    if($('#motion-note'))$('#motion-note').textContent=mediaMotion.matches?'Cihazındaki azaltılmış hareket tercihi etkin; animasyonlar otomatik olarak kapalı.':'Hafif kart, pencere ve sayfa geçişleri. İstersen kapatabilirsin.';
+    if($('#preview-theme-label'))$('#preview-theme-label').textContent=(theme==='dark'?'Koyu tema':'Açık tema')+(preferences.theme==='system'?' · Sistem':'');
+    if($('#preview-accent-label'))$('#preview-accent-label').textContent=accent.toUpperCase();
+  }
+  const savePreferences=()=>safeWrite('localStorage',PREFS_KEY+currentUser.username,preferences);
+  function updatePreferences(){
+    if(!currentUser)return;applyPreferences();const saved=savePreferences();
+    if($('#settings-saved'))$('#settings-saved').textContent=saved?'Bu hesap için kaydedildi.':'Bu tarayıcı kaydetmeye izin vermiyor; tercih yalnızca açık sayfada geçerli.';
+  }
+  mediaTheme.addEventListener('change',()=>{if(currentUser&&preferences.theme==='system')applyPreferences();});
+  mediaMotion.addEventListener('change',applyPreferences);
+  function enterApp(user){
+    if(!user)return;currentUser=user;
+    const saved=safeRead('localStorage',PREFS_KEY+user.username,{});preferences={scale:Number(saved?.scale)||100,theme:['light','dark','system'].includes(saved?.theme)?saved.theme:'light',accent:validHex(saved?.accent)?saved.accent.toLowerCase():DEFAULT_PREFERENCES.accent,motion:saved?.motion!==false};applyPreferences();
+    safeWrite('sessionStorage',SESSION_KEY,{username:user.username});
+    $('#auth-screen').hidden=true;$('#app').hidden=false;
+    $('#sidebar-name').textContent=user.name;$('#top-name').textContent=user.name;$('#sidebar-role').textContent=user.label;
+    const initials=user.name.split(' ').slice(0,2).map(n=>n[0]).join('').toLocaleUpperCase('tr-TR');$('#sidebar-avatar').textContent=initials;$('#top-avatar').textContent=initials;
+    $('#today').textContent=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date()).toLocaleUpperCase('tr-TR');
+    $('#main-nav').innerHTML=ACCESS[user.role].filter(p=>p!=='settings').map(p=>'<a href="#'+p+'" data-page="'+p+'"><span class="icon" aria-hidden="true">'+NAV[p][0]+'</span>'+NAV[p][1]+'</a>').join('');
+    navigate('home');
+  }
+  function logout(){
+    $('#detail-dialog').close();safeRemove('sessionStorage',SESSION_KEY);currentUser=null;$('#app').hidden=true;$('#auth-screen').hidden=false;$('#global-search').value='';$('#page-content').innerHTML='';closeMenu();clearTimeout(toastTimer);$('#toast').hidden=true;
+    preferences={...DEFAULT_PREFERENCES};applyPreferences();authMode('login');$('#login-form').reset();$('#login-password').type='password';$$('.show-password').forEach(b=>{b.textContent='Göster';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Parolayı göster');});$('#login-username').focus();
+    try{history.replaceState(null,'',location.pathname+location.search);}catch{}
+  }
+  const heading=(title,description)=>'<div class="page-heading"><div><h2>'+escapeHTML(title)+'</h2><p class="muted">'+escapeHTML(description)+'</p></div></div>';
+  const stat=(title,value,note,kind='tasks',color='blue')=>'<div class="card stat"><div><p>'+escapeHTML(title)+'</p><h3>'+escapeHTML(value)+'</h3><span class="badge">'+escapeHTML(note)+'</span></div><div class="stat-icon '+color+'">'+icon(kind)+'</div></div>';
+  const tag=(value)=>'<span class="tag '+(['Çözüldü','Onaylandı','Yurtta'].includes(value)?'green':['Acil','Reddedildi'].includes(value)?'red':'orange')+'">'+escapeHTML(value)+'</span>';
+  const visibleTasks=()=>currentUser.role==='admin'?tasks:currentUser.role==='student'?tasks.filter(t=>t.owner===currentUser.username):tasks.filter(t=>t.category===({technical:'technical',cleaning:'cleaning',dining:'dining',security:'permissions'}[currentUser.role]));
+  const taskList=(list)=>list.length?'<div class="task-list">'+list.map(t=>'<div class="task-card"><div><h3>'+escapeHTML(t.title)+'</h3><p>'+escapeHTML(t.id)+' · Oda '+escapeHTML(t.room)+' · '+escapeHTML(t.priority)+'</p></div><div class="task-actions">'+tag(t.status)+'<button type="button" class="btn" data-task="'+escapeHTML(t.id)+'">Detay →</button></div></div>').join('')+'</div>':'<div class="empty">Bu bölümde henüz bir demo kaydı yok.</div>';
+  const table=(headers,rows)=>'<div class="table-wrap"><table><thead><tr>'+headers.map(h=>'<th scope="col">'+escapeHTML(h)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+  function decorateDashboard(){
+    $$('.stat-icon',$('#page-content')).forEach((el,i)=>{el.innerHTML=icon(['students','rooms','tasks','dining'][i]);el.setAttribute('aria-hidden','true');});
+    $$('.link',$('#page-content')).forEach((el,i)=>{el.dataset.page=['requests','rooms','dining'][i];el.setAttribute('role','button');el.tabIndex=0;});
+    $$('.request',$('#page-content')).forEach((el,i)=>{el.dataset.task=['T184','C218','Y112','I302'][i];el.setAttribute('role','button');el.tabIndex=0;});
+    $$('.mini-room',$('#page-content')).forEach(el=>{el.dataset.room=el.textContent.trim();el.setAttribute('role','button');el.tabIndex=0;el.setAttribute('aria-label','Oda '+el.textContent+' detayları');});
+    const lastCard=$$('.grid>.card',$('#page-content')).at(-1);if(lastCard){const summary=lastCard.children[1];summary?.children[0]?.classList.add('summary-ring');summary?.children[1]?.classList.add('summary-copy');}
+  }
+  function homeContent(){
+    if(currentUser.role==='admin')return dashboardHTML;
+    if(currentUser.role==='student')return '<section class="stats summary-stats">'+stat('Odam',currentUser.room,'8 kişilik oda','rooms','purple')+stat('Açık taleplerim',visibleTasks().filter(t=>!['Çözüldü','Onaylandı','Reddedildi'].includes(t.status)).length,'Sadece kendi demo kayıtların')+stat('Akşam yemeği','18.00','Servis: 18.00–20.30','dining','green')+'</section><section class="card">'+heading('Taleplerim','Talep detaylarını ve güncel durumlarını buradan takip et.')+taskList(visibleTasks())+'</section>';
+    if(currentUser.role==='dining')return diningContent();
+    const mine=visibleTasks();const solved=mine.filter(t=>['Çözüldü','Onaylandı','Reddedildi'].includes(t.status)).length;
+    const category={technical:'Arıza kayıtları',cleaning:'Temizlik görevleri',security:'İzin talepleri'}[currentUser.role];
+    return '<section class="stats summary-stats">'+stat('Atanan kayıtlar',mine.length,'Bu demo ekranındaki kayıtlar')+stat('Bekleyen işler',mine.length-solved,'Güncel görev durumu','tasks','orange')+stat('Tamamlanan',solved,'Bu demo ekranındaki kayıtlar','tasks','green')+'</section><section class="card">'+heading(category,'Göreve tıkla; ayrıntıları incele ve durumunu güncelle.')+taskList(mine)+'</section>';
+  }
+  function settingsContent(){
+    const modes=[['light','☀','Açık'],['dark','☾','Koyu'],['system','◐','Sistem']].map(([value,symbol,label])=>'<label class="theme-option"><input type="radio" name="theme-mode" value="'+value+'"'+(preferences.theme===value?' checked':'')+'><span><span class="theme-symbol" aria-hidden="true">'+symbol+'</span><strong>'+label+'</strong></span></label>').join('');
+    const swatches=ACCENT_PRESETS.map(([label,value])=>'<label class="accent-choice"><input type="radio" name="accent-preset" value="'+value+'"'+(preferences.accent===value?' checked':'')+'><span><i class="color-dot" style="background:'+value+'" aria-hidden="true"></i>'+label+'</span></label>').join('');
+    return [
+      '<div class="settings-grid"><section class="card"><div class="settings-heading"><h2>Görünüm sana uyum sağlasın.</h2><p class="muted">Bu tercihler yalnızca <strong>'+escapeHTML(currentUser.username)+'</strong> hesabı için bu tarayıcıda hatırlanır.</p></div>',
+      '<fieldset class="theme-fieldset"><legend>Tema görünümü</legend><div class="theme-options">'+modes+'</div><p class="theme-note">Açık veya koyu görünümü seç; Sistem, cihazının tercihini izler.</p></fieldset>',
+      '<fieldset class="theme-fieldset"><legend>Tema rengi</legend><div class="accent-choices">'+swatches+'</div>',
+      '<div class="custom-color-row"><div class="custom-color-control"><label for="accent-picker">Özel renk</label><input id="accent-picker" type="color" value="'+preferences.accent+'" aria-describedby="accent-help"></div><label for="accent-hex" class="visually-hidden">Özel renk HEX kodu</label><input class="hex-field" id="accent-hex" type="text" value="'+preferences.accent+'" maxlength="7" pattern="#[0-9a-fA-F]{6}" spellcheck="false" autocomplete="off" aria-describedby="accent-help color-message" aria-invalid="false"></div>',
+      '<p id="accent-help" class="theme-note">Renk kutusuna tıkla veya HEX kodunu yaz. Seçtiğin renk açık ve koyu temada düğmelere, menülere ve grafiklere uygulanır.</p><p id="color-message" class="field-hint" role="status" hidden>Geçerli bir HEX kodu gir: örneğin #865DDE. Son geçerli renk korunuyor.</p></fieldset>',
+      '<div class="settings-separator"></div><div class="range-top"><label for="text-scale">Yazı büyüklüğü</label><output id="text-scale-output" for="text-scale">%'+preferences.scale+'</output></div>',
+      '<input type="range" id="text-scale" min="80" max="140" step="5" value="'+preferences.scale+'" aria-describedby="scale-help"><div class="range-labels"><span>Küçük · %80</span><span>Varsayılan · %100</span><span>Büyük · %140</span></div>',
+      '<p id="scale-help" class="muted">Kart başlıkları şu an <strong id="title-size-preview"></strong>. Yazılar anında değişir; simgeler 50 × 50 px kalır.</p>',
+      '<div class="settings-separator"></div><div class="motion-setting"><input type="checkbox" id="motion-toggle"'+(preferences.motion?' checked':'')+' aria-describedby="motion-note"><div><label for="motion-toggle">Yumuşak animasyonlar</label><small id="motion-note"></small></div></div>',
+      '<button type="button" class="btn" data-action="reset-theme">Varsayılana dön</button><p id="settings-saved" class="field-hint" role="status" style="margin-top:12px">Tercihler değiştikçe otomatik kaydedilir.</p></section>',
+      '<section class="card theme-preview-panel"><h2>Canlı önizleme</h2><p class="muted">Renk, görünüm ve yazı büyüklüğü tüm panelde anında güncellenir.</p><div class="preview-theme-meta"><span id="preview-theme-label"></span><span id="preview-accent-label" class="preview-accent"></span></div>',
+      '<div class="preview-stat">'+stat('Toplam öğrenci','500','Önizleme kartı','students')+'</div><p>Kartın üzerine gelerek yumuşak hareketi deneyebilirsin.</p><p class="muted">Varsayılan: kart başlığı 24 px; sağdaki simge 50 × 50 px.</p><p class="theme-note">Çok açık veya koyu bir renk seçersen bağlantı ve düğme yazılarının tonu okunaklı kalacak şekilde uyarlanır.</p></section></div>'
+    ].join('');
+  }
+  function diningContent(){return '<section class="stats summary-stats">'+stat('Yemek kullanan','384','Bugünün örnek toplamı','dining','green')+stat('Hazırlanan öğün','500','Planlanan kapasite','dining')+stat('Katılım','%76,8','Örnek günlük katılım','students','purple')+'</section><section class="card">'+heading('Günün menüsü','Örnek menü · 18.00–20.30 akşam servisi')+table(['Öğün','Menü','Servis'],[['Kahvaltı','Peynir, zeytin, yumurta, çay','07.00–09.30'],['Öğle','Mercimek çorbası, tavuk, pilav, ayran','12.00–14.00'],['Akşam','Sebze yemeği, bulgur pilavı, yoğurt','18.00–20.30']])+'</section>';}
+  function roomContent(){const rooms=Array.from({length:4},(_,floor)=>Array.from({length:6},(_,i)=>String((floor+1)*100+i+1))).flat();return '<section class="card">'+heading('Odalar ve katlar','8 kişilik odalardan örnekler. Detay için bir odayı seç.')+'<div class="room-grid">'+rooms.map(room=>{const issue=tasks.some(t=>t.room===room&&t.category==='technical'&&t.status!=='Çözüldü');return '<button class="room-button" type="button" data-room="'+room+'"><strong>Oda '+room+'</strong><small>6 / 8 yatak dolu</small>'+tag(issue?'Arıza kaydı':'Yurtta')+'</button>';}).join('')+'</div></section>';}
+  function contentFor(page){
+    if(page==='home')return homeContent();if(page==='settings')return settingsContent();if(page==='rooms')return roomContent();if(page==='dining')return diningContent();
+    if(['requests','technical','cleaning','permissions'].includes(page))return '<section class="card">'+heading(NAV[page][1],'Örnek kayıtlar · İşlemler bu sekmedeki demo oturumunda tutulur.')+taskList(visibleTasks().filter(t=>page==='requests'||t.category===page))+'</section>';
+    if(page==='students')return '<section class="card">'+heading('Öğrenciler','500 kişilik yurdun 4 örnek öğrenci kaydı. Gerçek kişi verisi içermez.')+table(['Öğrenci','Oda','Durum'],[['Emre · Demo','302',tag('Yurtta')],['Ahmet · Demo','101',tag('Yurtta')],['Can · Demo','218',tag('İzinli')],['Ali · Demo','405',tag('Yurtta')]])+'</section>';
+    if(page==='payments')return '<section class="card">'+heading('Ödeme özeti','Örnek gösterimdir; gerçek tahsilat veya ödeme işlemi yapılmaz.')+table(['Öğrenci','Yurt ücreti','Ödenen','Kalan'],[['Emre · Demo','12.000 TL','8.000 TL','4.000 TL'],['Ahmet · Demo','12.000 TL','12.000 TL','0 TL'],['Can · Demo','12.000 TL','6.000 TL','6.000 TL']])+'</section>';
+    return '';
+  }
+  function navigate(page,focus=true){
+    if(!currentUser)return;if(!ACCESS[currentUser.role].includes(page)){page='home';}
+    currentPage=page;$('#page-title').textContent=page==='home'?'Merhaba, '+currentUser.name.split(' ')[0]+' 👋':NAV[page][1];
+    $('#page-content').innerHTML=contentFor(page);if(page==='home'&&currentUser.role==='admin')decorateDashboard();
+    $$('.nav [data-page]').forEach(a=>{a.classList.toggle('active',a.dataset.page===page);if(a.dataset.page===page)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+    if(page==='settings')applyPreferences();
+    try{history.replaceState(null,'','#'+page);}catch{}
+    closeMenu();if(focus)$('#page-title').focus({preventScroll:true});
+  }
+  function openDialog(title,html){modalTrigger=document.activeElement;$('#dialog-title').textContent=title;$('#dialog-body').innerHTML=html;$('#detail-dialog').showModal();}
+  $('#close-dialog').addEventListener('click',()=>$('#detail-dialog').close());
+  $('#detail-dialog').addEventListener('close',()=>{if(modalTrigger?.isConnected)modalTrigger.focus();});
+  function taskDetail(id){
+    const task=visibleTasks().find(t=>t.id===id);if(!task)return notify('Bu demo hesabında bu kayda erişim yok.');
+    const canEdit=currentUser.role!=='student';
+    const actions=task.category==='permissions'?['Onaylandı','Reddedildi']:['Bekliyor','İşleme alındı','Çözüldü'];
+    openDialog(task.title,'<div class="detail-grid"><div><small>Kayıt</small>'+escapeHTML(task.id)+'</div><div><small>Oda</small>'+escapeHTML(task.room)+'</div><div><small>Öncelik</small>'+escapeHTML(task.priority)+'</div><div><small>Durum</small>'+tag(task.status)+'</div></div><p>'+escapeHTML(task.description)+'</p>'+(canEdit?'<div class="dialog-actions">'+actions.map(status=>'<button type="button" class="btn '+(status==='Çözüldü'||status==='Onaylandı'?'primary':'')+'" data-update-task="'+escapeHTML(task.id)+'" data-status="'+status+'">'+status+'</button>').join('')+'</div>':'<p class="muted">Bu kaydın durumunu ilgili personel güncelleyebilir.</p>'));
+  }
+  function roomDetail(room){
+    if(currentUser.role!=='admin')return;
+    const roomTasks=tasks.filter(t=>t.room===room);openDialog('Oda '+room,'<div class="detail-grid"><div><small>Kapasite</small>8 öğrenci</div><div><small>Örnek doluluk</small>6 / 8</div><div><small>Boş yatak</small>2</div><div><small>Kat</small>'+escapeHTML(room[0])+'. kat</div></div><h3 style="font-size:1rem;margin-top:24px">Odanın kayıtları</h3>'+taskList(roomTasks));
+  }
+  function showNotifications(){const list=visibleTasks().filter(t=>t.status==='Bekliyor');openDialog('Bildirimler',list.length?'<div class="notice-list">'+list.map(t=>'<div class="notice">'+escapeHTML(t.title)+'<small>Oda '+escapeHTML(t.room)+' · '+escapeHTML(t.status)+'</small></div>').join('')+'</div>':'<p class="muted">Yeni bildirim yok. Tüm demo kayıtların güncel.</p>');}
+  function closeMenu(){$('#sidebar').classList.remove('open');$('#mobile-scrim').classList.remove('open');$('#menu-button').setAttribute('aria-expanded','false');}
+  $('#menu-button').addEventListener('click',()=>{const opening=!$('#sidebar').classList.contains('open');$('#sidebar').classList.toggle('open',opening);$('#mobile-scrim').classList.toggle('open',opening);$('#menu-button').setAttribute('aria-expanded',String(opening));if(opening)$('#main-nav a').focus();});
+  $('#mobile-scrim').addEventListener('click',closeMenu);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();const target=event.target.closest('[role="button"][tabindex]');if(target&&(event.key==='Enter'||event.key===' ')){event.preventDefault();target.click();}});
+  document.addEventListener('click',event=>{
+    if(!currentUser)return;const target=event.target.closest('[data-page],[data-action],[data-task],[data-room],[data-update-task]');if(!target)return;
+    if(target.dataset.page){event.preventDefault();navigate(target.dataset.page);}
+    else if(target.dataset.task){if($('#detail-dialog').open)$('#detail-dialog').close();taskDetail(target.dataset.task);}
+    else if(target.dataset.room)roomDetail(target.dataset.room);
+    else if(target.dataset.updateTask){
+      const task=visibleTasks().find(t=>t.id===target.dataset.updateTask);if(!task||currentUser.role==='student')return;
+      const allowed=task.category==='permissions'?['Onaylandı','Reddedildi']:['Bekliyor','İşleme alındı','Çözüldü'];if(!allowed.includes(target.dataset.status))return;
+      task.status=target.dataset.status;const saved=safeWrite('sessionStorage',TASKS_KEY,tasks);$('#detail-dialog').close();navigate(currentPage,false);notify(saved?'Demo kaydı güncellendi.':'Kayıt bu sayfada güncellendi; tarayıcı oturum kaydına izin vermiyor.');
+    }else if(target.dataset.action==='logout')logout();
+    else if(target.dataset.action==='notifications')showNotifications();
+    else if(target.dataset.action==='profile')openDialog('Hesabım','<p><strong>'+escapeHTML(currentUser.name)+'</strong></p><p>'+escapeHTML(currentUser.username)+' · '+escapeHTML(currentUser.label)+'</p><p class="muted">Demo hesap · Gerçek sunucu yetkilendirmesi içermez.</p><div class="dialog-actions"><button class="btn danger" type="button" data-action="logout">Çıkış yap</button></div>');
+    else if(target.dataset.action==='reset-theme'){preferences={...DEFAULT_PREFERENCES};const saved=savePreferences();navigate('settings',false);notify(saved?'Tema varsayılana döndü.':'Tema sıfırlandı; tarayıcı kaydetmeye izin vermiyor.');}
+  });
+  function chooseAccent(value){
+    if(!validHex(value)){if($('#accent-hex'))$('#accent-hex').setAttribute('aria-invalid','true');if($('#color-message'))$('#color-message').hidden=false;return;}
+    preferences.accent=value.toLowerCase();
+    if($('#accent-hex')){$('#accent-hex').setAttribute('aria-invalid','false');$('#accent-hex').value=preferences.accent;}
+    if($('#color-message'))$('#color-message').hidden=true;
+    updatePreferences();
+  }
+  $('#page-content').addEventListener('input',event=>{
+    if(!currentUser)return;const field=event.target;
+    if(field.id==='text-scale'){preferences.scale=Number(field.value);updatePreferences();}
+    else if(field.id==='accent-picker'||field.id==='accent-hex')chooseAccent(field.value.trim());
+  });
+  $('#page-content').addEventListener('change',event=>{
+    if(!currentUser)return;const field=event.target;
+    if(field.name==='theme-mode'&&['light','dark','system'].includes(field.value)){preferences.theme=field.value;updatePreferences();}
+    else if(field.name==='accent-preset')chooseAccent(field.value);
+    else if(field.id==='accent-picker')chooseAccent(field.value);
+    else if(field.id==='motion-toggle'){preferences.motion=field.checked;updatePreferences();}
+  });
+  function runSearch(){
+    if(!currentUser)return;const query=normalize($('#global-search').value);if(!query)return;
+    const pages=ACCESS[currentUser.role].filter(p=>normalize(NAV[p][1]).includes(query));const matches=visibleTasks().filter(t=>normalize(t.title+' '+t.room+' '+t.id).includes(query));
+    openDialog('Arama: '+$('#global-search').value,'<div class="task-list">'+pages.map(p=>'<button type="button" class="btn search-destination" data-search-page="'+p+'">'+NAV[p][1]+' →</button>').join('')+'</div>'+taskList(matches));
+  }
+  $('#search-form').addEventListener('submit',event=>{event.preventDefault();runSearch();});
+  $('#dialog-body').addEventListener('click',event=>{const button=event.target.closest('[data-search-page]');if(button){$('#detail-dialog').close();navigate(button.dataset.searchPage);}});
+  window.addEventListener('hashchange',()=>{if(currentUser){const page=location.hash.slice(1);if(page!==currentPage)navigate(page);}});
+  applyPreferences();
+  const savedSession=safeRead('sessionStorage',SESSION_KEY,null);if(savedSession?.username){const user=lookupUser(savedSession.username);if(user)enterApp(user);else safeRemove('sessionStorage',SESSION_KEY);}
+})();
+</script>
+</body></html>
